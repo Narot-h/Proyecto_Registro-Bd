@@ -7,10 +7,9 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.InputMismatchException;
 public class PF_v12 {
-    private static int cant = 0;
     private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        int opcion;
+        int opcion = 0;
         Coneccion_Bd.conectar();
     
         do {
@@ -21,8 +20,20 @@ public class PF_v12 {
             System.out.println("4. EDITAR DATOS DE UN ALUMNO");
             System.out.println("5. SALIR");
             System.out.print("Selecciona una opcion: ");
-            opcion = sc.nextInt();
-
+            do {
+                try {
+                    opcion= sc.nextInt();
+                    if (opcion <1||opcion>5){
+                        System.out.println("Opcion invalidad; solo ingresar del 1 al 5 ");
+                        System.out.print("Selecciona nuevamente una opcion:");
+                    }
+                }catch (InputMismatchException e){
+                    System.out.println("Las letras no estan permitidas como opcion");
+                    sc.nextLine();
+                    System.out.print("Selecciona nuevamente un opcion: ");
+                }
+            }while (opcion <1||opcion >5);
+            
             switch(opcion) {
                 case 1:
                     registrar();
@@ -36,18 +47,17 @@ public class PF_v12 {
                 case 5:
                     System.out.println("Hasta luego");
                     break;
-                default:
-                    System.out.println("Opcion invalida");
             }
         } while (opcion != 5);
     }
     
     private static void registrar() {
         String NombreC, ApellidoC;
-        int edad = 0, codigo = 0, opcion;
+        int edad = 0, codigo = 0, opcion = 0;
         
         do {
             System.out.print("Ingrese codigo del Estudiante: ");
+            //Validador del codigo de estudiante
             do{
                 try {
                     codigo = sc.nextInt();
@@ -61,30 +71,31 @@ public class PF_v12 {
                     System.out.print("Ingrese nuevamente el codigo: ");
                 }
             }while (codigo < 99 || codigo > 999);
-            
             sc.nextLine();
-            System.out.println("Ingrese solo nombres completos: ");
             
+            System.out.println("Ingrese solo nombres completos: ");
+            //Validador del Nombre completo del estudiante 
             do {
                 NombreC= sc.nextLine();
-                if (NombreC.matches("[a-z; A-Z]+") == false){
+                if (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]") == false){
                     System.out.println("Caracter incorrecto");
                     System.out.println("Ingrese el nombre nuevamente:");
                 }
-            }while(NombreC.matches("[a-z; A-Z]+") == false);
+            }while(NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]+") == false);
+            sc.nextLine();
             
             System.out.println("Ingrese sus apellidos: ");
-            
+            //Validador del apellido
             do {
                 ApellidoC= sc.nextLine();           
-                if (ApellidoC.matches("[a-z; A-Z]+") == false){
+                if (ApellidoC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]") == false){
                     System.out.println("Caracter incorrecto");
-                    System.out.println("Ingrese el nombre nuevamente:");
+                    System.out.println("Ingrese el apellido nuevamente:");
                 }
-            }while(NombreC.matches("[a-z; A-Z]+") == false);
+            }while(ApellidoC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]") == false);
             
             System.out.print("Ingrese edad del estudiante: ");
-            
+            //Validador de la edad del estudiante
             do {
                 try {
                 edad=sc.nextInt();
@@ -117,9 +128,24 @@ public class PF_v12 {
                 System.out.println("1.  Registrar otro alumno");
                 System.out.println("2.  Regresar al menu");
                 System.out.println("---------------------------------------");
-                opcion= sc.nextInt();
-            }while(opcion != 1 && opcion != 2);
-        }while (opcion != 2);
+                //Nuevo
+                //Aqui falto poner un validador para las opcioens 1 y 2 pq cuando le puse 3 o una letra me salio error
+                do {
+                    try {
+                        opcion = sc.nextInt();
+                        if (opcion<1 || opcion>2){
+                            System.out.println("Opcion invalida; solo ingresar opciones (1-2)");
+                            System.out.print("Ingrese nuevamente la opcion: ");
+                        }
+                    }catch (InputMismatchException e){
+                        System.out.println("Las letras no estan permitidas como opciones");
+                        sc.nextLine();
+                        System.out.print("Selecciona nuevamente una opcion: ");
+                                                
+                    }
+                }while (opcion<1||opcion>2);
+            } while (opcion != 1 && opcion !=2 );
+        } while (opcion != 2);    
     }
     
     private static void lista() {
@@ -148,12 +174,27 @@ public class PF_v12 {
     }
     
     private static void buscar() {
-        int codBuscar, opcion;
+        int codBuscar=0, opcion = 0;
         boolean encontrado;
         
         do {
             System.out.println("Ingrese el codigo del alumno que quiere buscar");
-            codBuscar = sc.nextInt();
+            //Nuevo
+            //Validador para bsucar codigo
+            do{
+                try {
+                    codBuscar = sc.nextInt();
+                    if (codBuscar < 99 || codBuscar > 999){
+                        System.out.println("Codigo de estudiante fuera de rango");
+                        System.out.print("Ingrese nuevamente el codigo a buscar: ");
+                    }
+                } catch(InputMismatchException e){
+                    System.out.println("Error: Solo se permiten ingresar numeros no otras variables");
+                    sc.nextLine();
+                    System.out.print("Ingrese nuevamente el codigo: ");
+                }
+            }while (codBuscar < 99 || codBuscar > 999);
+            
             String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE Codigo=?";
             encontrado = false;
             
@@ -181,7 +222,22 @@ public class PF_v12 {
                 System.out.println("1. Buscar otro alumno");
                 System.out.println("2. Regresar al menu");
                 System.out.println("---------------------------------------");
-                opcion = sc.nextInt();
+                //Nuevo
+                //Aqui falto poner un validador para las opcioens 1 y 2 pq cuando le puse 3 o una letra me salio error
+                do {
+                    try {
+                        opcion = sc.nextInt();
+                        if (opcion<1 || opcion>2){
+                            System.out.println("Opcion invalida; solo ingresar opciones (1-2)");
+                            System.out.print("Ingrese nuevamente la opcion: ");
+                        }
+                    }catch (InputMismatchException e){
+                        System.out.println("Las letras no estan permitidas como opciones");
+                        sc.nextLine();
+                        System.out.print("Selecciona nuevamente una opcion: ");
+                                                
+                    }
+                }while (opcion<1||opcion>2);
             } while (opcion != 1 && opcion !=2 );
         } while (opcion != 2);    
     }
