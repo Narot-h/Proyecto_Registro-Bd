@@ -376,6 +376,7 @@ public class PF_v12 {
 
             if (encontrado == false) {
                 System.out.println("El codigo " + codBuscar + " no se encuentra en el registro");
+				return;
             }
 
 			do {
@@ -397,76 +398,77 @@ public class PF_v12 {
 		                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
 		            }
 		        } while (opcion < 1 || opcion > 2);
-		    } while (opcion != 1 && opcion != 2);
-			
-			do {
-		        System.out.println("--------[¿DESEA BUSCAR OTRO ALUMNO?]--------");
-		        System.out.println("1. Si");
-		        System.out.println("2. No");
-		        System.out.println("---------------------------------------");
-		        System.out.print("Seleccione una opcion (1 - 2): ");
-		        do {
-		            opcion= sc.nextInt();
-		            try {
-		                if (opcion < 1 || opcion > 2){
-	                        System.out.println("Opcion invalida. Numero fuera del rango");
-		                    System.out.print("Ingrese la opcion nuevamente (1 - 2):");
-		                }
-		            } catch (InputMismatchException e){
-	                    System.out.println("Opcion invalida. No se adminten letras");
-		                sc.nextLine();
-		                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
-		            }
-		        } while (opcion < 1 || opcion > 2);
-		    } while (opcion != 1 && opcion != 2);
 
-			switch (opcion){
-				caso 1:
+				if (opcion == 1) {
+					switch (opcion){
+						caso 1:
+							do {
+						        System.out.println("--------[¿QUE DESEA EDITAR?]--------");
+						        System.out.println("1. Codigo");
+						        System.out.println("2. Nombres");
+								System.out.println("3. Apellidos");
+								System.out.println("4. Edad");
+								System.out.println("5. Salir");
+						        System.out.println("---------------------------------------");
+						        System.out.print("Seleccione una opcion (1 - 5): ");
+						        do {
+						            opcion= sc.nextInt();
+						            try {
+						                if (opcion < 1 || opcion > 5){
+					                        System.out.println("Opcion invalida. Numero fuera del rango");
+						                    System.out.print("Ingrese la opcion nuevamente (1 - 5):");
+						                }
+						            } catch (InputMismatchException e){
+					                    System.out.println("Opcion invalida. No se adminten letras");
+						                sc.nextLine();
+						                System.out.print("Ingrese la opcion nuevamente (1 - 5):");
+						            }
+						        } while (opcion < 1 || opcion > 5);
+						    } while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5);
+		
+							switch (opcion) {
+								caso 1:
+									editcodigo();
+									break;
+								caso 2:
+									editnombres();
+									break;
+								caso 3:
+									editapellidos();
+									break;
+								caso 4:
+									editedad();
+									break;
+								caso 5:
+									return;
+							}
+							break;
+						caso 2:
+							return;
+					}
+				} else {
 					do {
-				        System.out.println("--------[¿QUE DESEA EDITAR?]--------");
-				        System.out.println("1. Codigo");
-				        System.out.println("2. Nombres");
-						System.out.println("3. Apellidos");
-						System.out.println("4. Edad");
-						System.out.println("5. Salir");
+				        System.out.println("--------[¿DESEA BUSCAR OTRO ALUMNO?]--------");
+				        System.out.println("1. Si");
+				        System.out.println("2. No");
 				        System.out.println("---------------------------------------");
-				        System.out.print("Seleccione una opcion (1 - 5): ");
+				        System.out.print("Seleccione una opcion (1 - 2): ");
 				        do {
 				            opcion= sc.nextInt();
 				            try {
-				                if (opcion < 1 || opcion > 5){
+				                if (opcion < 1 || opcion > 2){
 			                        System.out.println("Opcion invalida. Numero fuera del rango");
-				                    System.out.print("Ingrese la opcion nuevamente (1 - 5):");
+				                    System.out.print("Ingrese la opcion nuevamente (1 - 2):");
 				                }
 				            } catch (InputMismatchException e){
 			                    System.out.println("Opcion invalida. No se adminten letras");
 				                sc.nextLine();
-				                System.out.print("Ingrese la opcion nuevamente (1 - 5):");
+				                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
 				            }
-				        } while (opcion < 1 || opcion > 5);
-				    } while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5);
-
-					switch (opcion) {
-						caso 1:
-							editcodigo();
-							break;
-						caso 2:
-							editnombres();
-							break;
-						caso 3:
-							editapellidos();
-							break;
-						caso 4:
-							editedad();
-							break;
-						caso 5:
-							return;
-					}
-					break;
-				caso 2:
-					return;
-			}
-			
+				        } while (opcion < 1 || opcion > 2);
+				    } while (opcion != 1 && opcion != 2);
+				}
+		    } while (opcion != 1 && opcion != 2);
         } while (opcion == 1);
     }
 	
