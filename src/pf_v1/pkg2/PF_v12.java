@@ -24,7 +24,7 @@ public class PF_v12 {
             do {
                 try {
                     opcion = sc.nextInt();
-                    if (opcion < 1 || opcion > 5){
+                    if (opcion < 1 || opcion > 5) {
                         System.out.println("Opcion invalida. Numero fuera del rango");
                         System.out.print("Ingrese la opcion nuevamente (1 - 6):");
                     }
@@ -67,7 +67,7 @@ public class PF_v12 {
             do {
                 try {
                     codigo = sc.nextInt();
-                    if (codigo < 99 && codigo > 999){
+                    if (codigo < 99 && codigo > 999) {
                         System.out.println("Codigo de estudiante fuera de rango");
                         System.out.print("Cree nuevamente el codigo: ");
                     }
@@ -102,7 +102,7 @@ public class PF_v12 {
             do {
                 try {
                 edad = sc.nextInt();
-                if (edad < 16 || edad > 50){
+                if (edad < 16 || edad > 50) {
                     System.out.println("Edad incorrecta rango de edad -> (16 - 50)");
                     System.out.print("Ingrese la edad de nuevo: ");
                 }
@@ -134,11 +134,11 @@ public class PF_v12 {
                 do {
                     try {
                         opcion= sc.nextInt();
-                        if (opcion < 1 || opcion > 2){
+                        if (opcion < 1 || opcion > 2) {
                             System.out.println("Opcion invalida. Numero fuera del rango");
                             System.out.print("Ingrese la opcion nuevamente (1 - 2):");
                         }
-                    } catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                         System.out.println("Opcion invalida. No se adminten letras");
                         sc.nextLine();
                         System.out.print("Ingrese la opcion nuevamente (1 - 2):");
@@ -186,11 +186,11 @@ public class PF_v12 {
             do {
                 opcion= sc.nextInt();
                 try {
-                    if (opcion < 1 || opcion > 4){
+                    if (opcion < 1 || opcion > 4) {
                         System.out.println("Opcion invalida. Numero fuera del rango");
                         System.out.print("Ingrese la opcion nuevamente (1 - 4):");
                     }
-                } catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Opcion invalida. No se adminten letras");
                     sc.nextLine();
                     System.out.print("Ingrese la opcion nuevamente (1 - 4):");
@@ -219,7 +219,7 @@ public class PF_v12 {
             do {
                 try {
                     codBuscar = sc.nextInt();
-                    if (codBuscar < 99 || codBuscar > 999){
+                    if (codBuscar < 99 || codBuscar > 999) {
                         System.out.println("Codigo de estudiante no existe");
                         System.out.print("Ingrese nuevamente el codigo a buscar: ");
                     }
@@ -321,11 +321,11 @@ public class PF_v12 {
                 do {
                     opcion= sc.nextInt();
                     try {
-                        if (opcion < 1 || opcion > 2){
+                        if (opcion < 1 || opcion > 2) {
                             System.out.println("Opcion invalida. Numero fuera del rango");
                             System.out.print("Ingrese la opcion nuevamente (1 - 2):");
                         }
-                    } catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                         System.out.println("Opcion invalida. No se adminten letras");
                         sc.nextLine();
                         System.out.print("Ingrese la opcion nuevamente (1 - 2):");
@@ -344,7 +344,7 @@ public class PF_v12 {
             do {
                 try {
                     codBuscar = sc.nextInt();
-                    if (codBuscar < 99 || codBuscar > 999){
+                    if (codBuscar < 99 || codBuscar > 999) {
                         System.out.println("Codigo de estudiante no existe");
                         System.out.print("Ingrese nuevamente el codigo a buscar: ");
                     }
@@ -384,11 +384,11 @@ public class PF_v12 {
                 do {
                     opcion= sc.nextInt();
                     try {
-                        if (opcion < 1 || opcion > 2){
+                        if (opcion < 1 || opcion > 2) {
                         System.out.println("Opcion invalida. Numero fuera del rango");
                             System.out.print("Ingrese la opcion nuevamente (1 - 2):");
                         }
-                    } catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                     System.out.println("Opcion invalida. No se adminten letras");
                         sc.nextLine();
                         System.out.print("Ingrese la opcion nuevamente (1 - 2):");
@@ -410,11 +410,11 @@ public class PF_v12 {
                                 do {
                                     opcion= sc.nextInt();
                                     try {
-                                        if (opcion < 1 || opcion > 5){
+                                        if (opcion < 1 || opcion > 5) {
                                             System.out.println("Opcion invalida. Numero fuera del rango");
                                             System.out.print("Ingrese la opcion nuevamente (1 - 5):");
                                         }
-                                    } catch (InputMismatchException e){
+                                    } catch (InputMismatchException e) {
                                         System.out.println("Opcion invalida. No se adminten letras");
                                         sc.nextLine();
                                         System.out.print("Ingrese la opcion nuevamente (1 - 5):");
@@ -426,62 +426,165 @@ public class PF_v12 {
                                     int NewCodigo;
                                     System.out.print("Ingrese su nuevo nombre: ");
                                     NewCodigo=sc.nextInt();
-                                    //poner validador 
-                                    String sqlUpCodigo="UPDATE Estudiantes SET Codigo=? WHERE Codigo=?";                                     
-                                     try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpCodigo)){
-                                         Consult.setInt(1, NewCodigo);
-                                         Consult.setInt(2, codBuscar);
-                                         Consult.executeUpdate();
-                                         System.out.println("Codigo actualizado correctamente!!!");
-                                     } catch (SQLException e) {
-                                         System.out.println("Error al actualizar: " + e.getMessage());
-                                     }
+                                    
+									do {
+				                        System.out.println("--------[¿ESTA SEGURO QUE DESEA EDITAR ESTE CODIGO?]--------");
+				                        System.out.println("1. Si");
+				                        System.out.println("2. No");
+				                        System.out.println("---------------------------------------");
+				                        System.out.print("Seleccione una opcion (1 - 2): ");
+				                        do {
+				                            opcion= sc.nextInt();
+				                            try {
+				                                if (opcion < 1 || opcion > 2) {
+				                                System.out.println("Opcion invalida. Numero fuera del rango");
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                                }
+				                            } catch (InputMismatchException e) {
+				                                System.out.println("Opcion invalida. No se adminten letras");
+				                                sc.nextLine();
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                            }
+				                        } while (opcion < 1 || opcion > 2);
+				                    } while (opcion != 1 && opcion != 2);
+
+									if (opcion == 1) {
+	                                    String sqlUpCodigo="UPDATE Estudiantes SET Codigo=? WHERE Codigo=?";                                     
+	                                    try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpCodigo)){
+	                                        Consult.setInt(1, NewCodigo);
+	                                        Consult.setInt(2, codBuscar);
+	                                        Consult.executeUpdate();
+	                                        System.out.println("Codigo actualizado correctamente!!!");
+	                                    } catch (SQLException e) {
+	                                        System.out.println("Error al actualizar: " + e.getMessage());
+	                                    }
+									} else {
+										System.out.println("Operacion cancelada");
+										return;
+									}
                                     break;
                                 case 2:
                                     String NewNombre;
                                     System.out.print("Ingrese su nuevo nombre: ");
                                     NewNombre=sc.nextLine();
-                                    //poner validador 
+
+									 do {
+				                        System.out.println("--------[¿ESTA SEGURO QUE DESEA EDITAR ESTE NOMBRE?]--------");
+				                        System.out.println("1. Si");
+				                        System.out.println("2. No");
+				                        System.out.println("---------------------------------------");
+				                        System.out.print("Seleccione una opcion (1 - 2): ");
+				                        do {
+				                            opcion= sc.nextInt();
+				                            try {
+				                                if (opcion < 1 || opcion > 2) {
+				                                System.out.println("Opcion invalida. Numero fuera del rango");
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                                }
+				                            } catch (InputMismatchException e) {
+				                                System.out.println("Opcion invalida. No se adminten letras");
+				                                sc.nextLine();
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                            }
+				                        } while (opcion < 1 || opcion > 2);
+				                    } while (opcion != 1 && opcion != 2);
+
+									if (opcion == 1) {
                                     String sqlUpNombre="UPDATE Estudiantes SET nombre=? WHERE Codigo=?";                                     
-                                     try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpNombre)){
-                                         Consult.setString(1, NewNombre);
-                                         Consult.setInt(2, codBuscar);
-                                         Consult.executeUpdate();
-                                         System.out.println("Nombre actualizado correctamente!!!");
-                                     } catch (SQLException e) {
-                                         System.out.println("Error al actualizar: " + e.getMessage());
-                                     }
+	                                    try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpNombre)){
+	                                    	Consult.setString(1, NewNombre);
+	                                        Consult.setInt(2, codBuscar);
+	                                    	Consult.executeUpdate();
+	                                        System.out.println("Nombre actualizado correctamente!!!");
+	                                    } catch (SQLException e) {
+	                                        System.out.println("Error al actualizar: " + e.getMessage());
+	                                    }
+									} else {
+										System.out.println("Operacion cancelada");
+										return;
+									}
                                     break;
                                 case 3:
                                     String NewApellido;
                                     System.out.print("Ingrese su nuevo nombre: ");
                                     NewApellido=sc.nextLine();
-                                    //poner validador 
-                                    String sqlUpApellido="UPDATE Estudiantes SET apellido=? WHERE Codigo=?";                                     
-                                     try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpApellido)){
-                                         Consult.setString(1, NewApellido);
-                                         Consult.setInt(2, codBuscar);
-                                         Consult.executeUpdate();
-                                         System.out.println("Apellido actualizado correctamente!!!");
-                                     } catch (SQLException e) {
-                                         System.out.println("Error al actualizar: " + e.getMessage());
-                                     }
-                                    System.out.println("Funciona opcion 3");
+
+									do {
+				                        System.out.println("--------[¿ESTA SEGURO QUE DESEA EDITAR ESTE APELLIDO?]--------");
+				                        System.out.println("1. Si");
+				                        System.out.println("2. No");
+				                        System.out.println("---------------------------------------");
+				                        System.out.print("Seleccione una opcion (1 - 2): ");
+				                        do {
+				                            opcion= sc.nextInt();
+				                            try {
+				                                if (opcion < 1 || opcion > 2) {
+				                                System.out.println("Opcion invalida. Numero fuera del rango");
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                                }
+				                            } catch (InputMismatchException e) {
+				                                System.out.println("Opcion invalida. No se adminten letras");
+				                                sc.nextLine();
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                            }
+				                        } while (opcion < 1 || opcion > 2);
+				                    } while (opcion != 1 && opcion != 2);
+
+									if (opcion 1) {
+	                                    String sqlUpApellido="UPDATE Estudiantes SET apellido=? WHERE Codigo=?";                                     
+	                                    try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpApellido)){
+	                                        Consult.setString(1, NewApellido);
+	                                        Consult.setInt(2, codBuscar);
+	                                        Consult.executeUpdate();
+	                                        System.out.println("Apellido actualizado correctamente!!!");
+	                                    } catch (SQLException e) {
+	                                        System.out.println("Error al actualizar: " + e.getMessage());
+	                                    }
+									} else {
+										System.out.println("Operacion cancelada");
+										return;
+									}
                                     break;
                                 case 4:
                                     int NewEdad;
                                     System.out.print("Ingrese su nuevo nombre: ");
                                     NewEdad=sc.nextInt();
-                                    //poner validador 
-                                    String sqlUpEdad="UPDATE Estudiantes SET edad=? WHERE Codigo=?";                                     
-                                     try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpEdad)){
-                                         Consult.setInt(1, NewEdad);
-                                         Consult.setInt(2, codBuscar);
-                                         Consult.executeUpdate();
-                                         System.out.println("Codigo actualizado correctamente!!!");
-                                     } catch (SQLException e) {
-                                         System.out.println("Error al actualizar: " + e.getMessage());
-                                     }
+
+									do {
+				                        System.out.println("--------[¿ESTA SEGURO QUE DESEA EDITAR ESTA EDAD?]--------");
+				                        System.out.println("1. Si");
+				                        System.out.println("2. No");
+				                        System.out.println("---------------------------------------");
+				                        System.out.print("Seleccione una opcion (1 - 2): ");
+				                        do {
+				                            opcion= sc.nextInt();
+				                            try {
+				                                if (opcion < 1 || opcion > 2) {
+				                                System.out.println("Opcion invalida. Numero fuera del rango");
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                                }
+				                            } catch (InputMismatchException e) {
+				                                System.out.println("Opcion invalida. No se adminten letras");
+				                                sc.nextLine();
+				                                System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				                            }
+				                        } while (opcion < 1 || opcion > 2);
+				                    } while (opcion != 1 && opcion != 2);
+
+									if (opcion == 1) {
+	                                    String sqlUpEdad="UPDATE Estudiantes SET edad=? WHERE Codigo=?";                                     
+	                                    try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlUpEdad)){
+	                                        Consult.setInt(1, NewEdad);
+	                                        Consult.setInt(2, codBuscar);
+	                                        Consult.executeUpdate();
+	                                        System.out.println("Codigo actualizado correctamente!!!");
+	                                    } catch (SQLException e) {
+	                                        System.out.println("Error al actualizar: " + e.getMessage());
+	                                    }
+									} else {
+										System.out.println("Operacion cancelada");
+										return;
+									}
                                     break;
                                 case 5:
                                     return;
@@ -521,8 +624,9 @@ public class PF_v12 {
         
         System.out.println("Ingrese el codigo del alumno a eliminar");
         codBuscar = sc.nextInt();
-        //poner validador
-        
+
+
+		
         String sql= "SELECT Codigo, nombre, apellido, edad FROM Estudiantes WHERE Codigo=? ";
         encontrado= false;
         try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
@@ -543,26 +647,40 @@ public class PF_v12 {
             System.out.println("El codigo " + codBuscar + " no se encuentra en el registro");
             return;
         }
-        System.out.println("--------[SEGURO QUE DESEA ELIMINAR A ESTE ALUMNO?]--------");
-        System.out.println("1. Si");
-        System.out.println("2. No");        
-        System.out.println("-----------------------------------------------------------");
-        System.out.print("Seleccione una opcion (1 - 2): ");
-        opcion=sc.nextInt();
-        //poner validador
-        if (opcion==2){
-            System.out.println("Operacion Cancelada");
-            return;            
-        }
-        
-        String sqlDelete="DELETE FROM Estudiantes WHERE Codigo=?";
-        try(Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlDelete)){
-            Consult.setInt(1, codBuscar);
-            Consult.executeUpdate();
-            System.out.println("Alumno eliminado correctamente");
-        }catch (SQLException e){
-            System.out.println("Error al eliminar: " + e.getMessage());
-        }
+        do {
+			System.out.println("--------[¿ESTA SEGURO DE QUE QUIERE EDITAR ESTE NOMBRE?]--------");
+			System.out.println("1. Si");
+			System.out.println("2. No");
+			System.out.println("---------------------------------------");
+			System.out.print("Seleccione una opcion (1 - 2): ");
+			do {
+			opcion= sc.nextInt();
+				try {
+					if (opcion < 1 || opcion > 2) {
+						System.out.println("Opcion invalida. Numero fuera del rango");
+						System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+					}
+				} catch (InputMismatchException e) {
+					System.out.println("Opcion invalida. No se adminten letras");
+					sc.nextLine();
+					System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+				}
+			} while (opcion < 1 || opcion > 2);
+		} while (opcion != 1 && opcion != 2);
+
+		if (opcion == 1) {
+	        String sqlDelete="DELETE FROM Estudiantes WHERE Codigo=?";
+	        try(Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sqlDelete)){
+	            Consult.setInt(1, codBuscar);
+	            Consult.executeUpdate();
+	            System.out.println("Alumno eliminado correctamente");
+	        }catch (SQLException e){
+	            System.out.println("Error al eliminar: " + e.getMessage());
+	        }
+		} else { 
+			System.out.println("Operacion cancelada");
+			return;
+		}
     }
     
 }
