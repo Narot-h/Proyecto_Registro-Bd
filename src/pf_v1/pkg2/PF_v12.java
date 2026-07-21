@@ -293,11 +293,11 @@ public class PF_v12 {
             } while (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false);
             sc.nextLine();
             // AQUI DEBE DE ESTAR LA BUSQUEDA DEL NOMBRE EN LA BASE DE DATOS (YA LO EDITE, COPIA Y PEGA TODO EN EL NEAT BEENS Y ERIFICA LEONARDO) LO DE ARRIBA YA ESTA BIEN
-            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE nombre=?";
+            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE nombre LIKE ?";
             encontrado = false;
             
             try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
-                Consult.setInt(1, NombreC);
+                Consult.setInt(1, "%"+NombreC+"%");
                 ResultSet Envio = Consult.executeQuery();
                 if (Envio.next()) {
                     encontrado = true;
