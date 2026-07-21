@@ -216,7 +216,7 @@ public class PF_v12 {
         int c, codBuscar, opcion;
         boolean encontrado = false;
         do {
-            System.out.println("Ingrese el codigo del alumno que quiere buscar");
+            System.out.println("Ingrese el codigo del alumno");
             do {
                 try {
                     codBuscar = sc.nextInt();
@@ -279,26 +279,23 @@ public class PF_v12 {
         int c, codBuscar, opcion;
         boolean encontrado = false;
         do {
-            System.out.println("Ingrese los nombres del alumno que quiere buscar");
+            System.out.println("Ingrese los nombres del alumno");
             do {
-                try {
-                    codBuscar = sc.nextInt();
-                    if (codBuscar < 99 || codBuscar > 999){
-                        System.out.println("Codigo de estudiante no existe");
-                        System.out.print("Ingrese nuevamente el codigo a buscar: ");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Opcion invalida. No se adminten letras");
-                    sc.nextLine();
-                    System.out.print("Ingrese nuevamente el codigo: ");
+                NombreC = sc.nextLine();
+                if (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false) {
+                    System.out.println("Caracter incorrecto");
+                    System.out.println("Ingrese los nombre nuevamente:");
                 }
-            } while (codBuscar < 99 || codBuscar > 999);
+            } while (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false);
+            sc.nextLine();
+
+            // AQUI DEBE DE ESTAR LA BUSQUEDA DEL NOMBRE EN LA BASE DE DATOS (YA LO EDITE, COPIA Y PEGA TODO EN EL NEAT BEENS Y ERIFICA LEONARDO) LO DE ARRIBA YA ESTA BIEN
             
             String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE Codigo=?";
             encontrado = false;
             
             try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
-                Consult.setInt(1, codBuscar);
+                Consult.setInt(2, codBuscar);
                 ResultSet Envio = Consult.executeQuery();
                 if (Envio.next()) {
                     encontrado = true;
@@ -308,12 +305,12 @@ public class PF_v12 {
                     System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
                     System.out.println("---------------------------------------------------------");        
                 }
-            }catch (SQLException Error101) {
+            } catch (SQLException Error101) {
                 System.out.println("Error de busqueda: "+ Error101.getMessage());
             }
                 
             if (encontrado == false) {
-                System.out.println("El codigo " + codBuscar + " no se encuentra en el registro");
+                System.out.println("El alumno con el nombre: " + codBuscar + ", no se encuentra en el registro");
             }
                         
             do {
