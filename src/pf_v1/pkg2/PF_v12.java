@@ -207,15 +207,12 @@ public class PF_v12 {
                 pornombre();
                 break;
             case 3:
-                porapellido();
-                break;
-            case 4:
                 return;
         }
     }
     
     private static void porcodigo() {
-        int c, codBuscar, opcion;
+        int codBuscar, opcion;
         boolean encontrado = false;
         do {
             System.out.println("Ingrese el codigo del alumno");
@@ -280,39 +277,40 @@ public class PF_v12 {
     
     private static void pornombre() {
         int opcion;
-        String NombreC;
+        String AlumBuscar;
         boolean encontrado = false;
         do {
-            System.out.print("Ingrese los nombres del alumno: ");
+            System.out.println("Ingrese los nombres/apellidos del alumno");
             do {
-                NombreC = sc.nextLine();
-                if (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false) {
+                AlumBuscar = sc.nextLine();
+                if (AlumBuscar.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false) {
                     System.out.println("Caracter incorrecto");
-                    System.out.println("Ingrese los nombre nuevamente:");
+                    System.out.println("Ingrese el nombre/apellido nuevamente:");
                 }
-            } while (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false);
-            sc.nextLine();
+            } while (AlumBuscar.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false);
             // AQUI DEBE DE ESTAR LA BUSQUEDA DEL NOMBRE EN LA BASE DE DATOS (YA LO EDITE, COPIA Y PEGA TODO EN EL NEAT BEENS Y ERIFICA LEONARDO) LO DE ARRIBA YA ESTA BIEN
-            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE nombre LIKE ?";
+            
+            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE nombre LIKE ? OR apellido LIKE ?";
             encontrado = false;
             
             try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
-                Consult.setInt(1, "%"+NombreC+"%");
+                Consult.setString(1,"%" + AlumBuscar + "%");
+		        Consult.setString(2,"%" + AlumBuscar + "%");
                 ResultSet Envio = Consult.executeQuery();
                 System.out.println("Alumno encontrado!");
                 System.out.println("---------------------------------------------------------");
                 System.out.println("[CODIGO]     [EDAD]                [ALUMNO]              ");
                 while (Envio.next()) {
                     encontrado = true;
-                    System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));        
+                    System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
                 }
-                System.out.println("---------------------------------------------------------");
+                System.out.println("---------------------------------------------------------");        
             } catch (SQLException Error101) {
                 System.out.println("Error de busqueda: "+ Error101.getMessage());
             }
                 
             if (encontrado == false) {
-                System.out.println("El alumno con el nombre: " + codBuscar + ", no se encuentra en el registro");
+                System.out.println("El alumno con el nombre/apellido: " + AlumBuscar + ", no se encuentra en el registro");
             }
                         
             do {
@@ -337,9 +335,6 @@ public class PF_v12 {
             } while (opcion != 1 && opcion != 2);
             sc.nextLine();
         } while (opcion != 2);
-    }
-    
-    private static void porapellido() {
     }
 
     private static void editar() {
