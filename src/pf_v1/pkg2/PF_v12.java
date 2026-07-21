@@ -244,8 +244,8 @@ public class PF_v12 {
                     System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
                     System.out.println("---------------------------------------------------------");        
                 }
-            }catch (SQLException Error101) {
-                System.out.println("Error de busqueda: "+ Error101.getMessage());
+            }catch (SQLException e) {
+                System.out.println("Error de busqueda: " + e.getMessage());
             }
                 
             if (encontrado == false) {
@@ -337,6 +337,67 @@ public class PF_v12 {
     }
 
     private static void editar() {
+		int codBuscar, opcion;
+        boolean encontrado = false;
+        do {
+            System.out.println("Ingrese el codigo del alumno al que quiera editar los datos");
+            do {
+                try {
+                    codBuscar = sc.nextInt();
+                    if (codBuscar < 99 || codBuscar > 999){
+                        System.out.println("Codigo de estudiante no existe");
+                        System.out.print("Ingrese nuevamente el codigo a buscar: ");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Opcion invalida. No se adminten letras");
+                    sc.nextLine();
+                    System.out.print("Ingrese nuevamente el codigo: ");
+                }
+            } while (codBuscar < 99 || codBuscar > 999);
+            
+            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE Codigo=?";
+            encontrado = false;
+            
+            try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
+                Consult.setInt(1, codBuscar);
+                ResultSet Envio = Consult.executeQuery();
+                if (Envio.next()) {
+                    encontrado = true;
+                    System.out.println("Alumno encontrado!");
+                    System.out.println("---------------------------------------------------------");
+                    System.out.println("[CODIGO]     [EDAD]                [ALUMNO]              ");
+                    System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
+                    System.out.println("---------------------------------------------------------");        
+                }
+            }catch (SQLException e) {
+                System.out.println("Error de busqueda: " + e.getMessage());
+            }
+                
+            if (encontrado == false) {
+                System.out.println("El codigo " + codBuscar + " no se encuentra en el registro");
+            }
+                        
+            do {
+                System.out.println("--------[SELECCIONA UNA OPCION]--------");
+                System.out.println("1. Editar otro nombre");
+                System.out.println("2. Regresar al Menu");
+                System.out.println("---------------------------------------");
+                System.out.print("Seleccione una opcion (1 - 2): ");
+                do {
+                    opcion= sc.nextInt();
+                    try {
+                        if (opcion < 1 || opcion > 2){
+                            System.out.println("Opcion invalida. Numero fuera del rango");
+                            System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+                        }
+                    } catch (InputMismatchException e){
+                        System.out.println("Opcion invalida. No se adminten letras");
+                        sc.nextLine();
+                        System.out.print("Ingrese la opcion nuevamente (1 - 2):");
+                    }
+                } while (opcion < 1 || opcion > 2);
+            } while (opcion != 1 && opcion != 2);
+        } while (opcion != 2);
     }
 
 	private static void eliminar() {
