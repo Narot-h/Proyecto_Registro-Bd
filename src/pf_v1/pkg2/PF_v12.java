@@ -379,7 +379,7 @@ public class PF_v12 {
                         
             do {
                 System.out.println("--------[SELECCIONA UNA OPCION]--------");
-                System.out.println("1. Editar otro nombre");
+                System.out.println("1. Editar otro alumno");
                 System.out.println("2. Regresar al Menu");
                 System.out.println("---------------------------------------");
                 System.out.print("Seleccione una opcion (1 - 2): ");
