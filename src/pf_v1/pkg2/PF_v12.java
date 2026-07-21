@@ -14,9 +14,9 @@ public class PF_v12 {
     
         do {
             System.out.println("--------[BIENVENIDO]----------");
-            System.out.println("1. REGISTRAR ESTUDIANTES");
-            System.out.println("2. LISTA DE ESTUDIANTES");
-            System.out.println("3. BUSCAR POR CODIGO");
+            System.out.println("1. REGISTRAR ALUMNO");
+            System.out.println("2. LISTA DE ALUMNOS");
+            System.out.println("3. BUSCAR ALUMNO");
             System.out.println("4. EDITAR DATOS DE UN ALUMNO");
             System.out.println("5. ELIMINAR DATOS DE UN ALUMNO");
             System.out.println("6. SALIR");
@@ -128,8 +128,8 @@ public class PF_v12 {
             
             do {
                 System.out.println("--------[SELECCIONA UNA OPCION]--------");
-                System.out.println("1.  Registrar otro alumno");
-                System.out.println("2.  Regresar al menu");
+                System.out.println("1.  Registrar otro Alumno");
+                System.out.println("2.  Regresar al Menu");
                 System.out.println("---------------------------------------");
                 do {
                     try {
@@ -174,9 +174,48 @@ public class PF_v12 {
     }
     
     private static void buscar() {
-        int codBuscar = 0, opcion = 0;
-        boolean encontrado;
-        
+        int opcion = 0;
+        do {
+            System.out.println("--------[SELECCIONA MODO DE BUSQUEDA]--------");
+            System.out.println("1. Buscar por Codigo");
+            System.out.println("2. Buscar por Nombre");
+            System.out.println("3. Buscar por Apellido");
+            System.out.println("4. Regresar al Menu");
+            System.out.println("---------------------------------------");
+            do {
+                opcion= sc.nextInt();
+                try {
+                    if (opcion < 1 || opcion > 4){
+                        System.out.println("Opcion invalida. Numero fuera del rango");
+                        System.out.print("Ingrese la opcion nuevamente (1 - 4):");
+                    }
+                } catch (InputMismatchException e){
+                    System.out.println("Opcion invalida. No se adminten letras");
+                    sc.nextLine();
+                    System.out.print("Ingrese la opcion nuevamente (1 - 4):");
+                }
+            } while (opcion < 1 || opcion > 4);
+        } while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4);
+
+        switch (opcion) {
+            case 1:
+                porcodigo();
+                break;
+            case 2:
+                pornombre();
+                break;
+            case 3:
+                porapellido();
+                break;
+            case 4:
+                return;
+        }
+    }
+    
+    private static void porcodigo() {
+        int c, codBuscar, opcion;
+        boolean encontrado = false;
+        String codBuscarS;
         do {
             System.out.println("Ingrese el codigo del alumno que quiere buscar");
             do {
@@ -210,19 +249,19 @@ public class PF_v12 {
             }catch (SQLException Error101) {
                 System.out.println("Error de busqueda: "+Error101.getMessage());
             }
-            
+                
             if (encontrado == false) {
                 System.out.println("El codigo " + codBuscar + " no se encuentra en el registro");
             }
-                    
+                        
             do {
                 System.out.println("--------[SELECCIONA UNA OPCION]--------");
-                System.out.println("1. Buscar otro alumno");
-                System.out.println("2. Regresar al menu");
+                System.out.println("1. Buscar otro Alumno");
+                System.out.println("2. Regresar al Menu");
                 System.out.println("---------------------------------------");
                 do {
+                    opcion= sc.nextInt();
                     try {
-                        opcion= sc.nextInt();
                         if (opcion < 1 || opcion > 2){
                             System.out.println("Opcion invalida. Numero fuera del rango");
                             System.out.print("Ingrese la opcion nuevamente (1 - 2):");
@@ -233,8 +272,16 @@ public class PF_v12 {
                         System.out.print("Ingrese la opcion nuevamente (1 - 2):");
                     }
                 } while (opcion < 1 || opcion > 2);
-            } while (opcion != 1 && opcion != 2 );
-        } while (opcion != 2);    
+            } while (opcion != 1 && opcion != 2);
+        } while (opcion != 2);
+    }
+    
+    private static void pornombre() {
+    }
+    
+    private static void porapellido() {
     }
 
+    private static void editar() {
+    }
 }
