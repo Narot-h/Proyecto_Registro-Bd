@@ -299,14 +299,14 @@ public class PF_v12 {
             try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
                 Consult.setInt(1, "%"+NombreC+"%");
                 ResultSet Envio = Consult.executeQuery();
-                if (Envio.next()) {
+                System.out.println("Alumno encontrado!");
+                System.out.println("---------------------------------------------------------");
+                System.out.println("[CODIGO]     [EDAD]                [ALUMNO]              ");
+                while (Envio.next()) {
                     encontrado = true;
-                    System.out.println("Alumno encontrado!");
-                    System.out.println("---------------------------------------------------------");
-                    System.out.println("[CODIGO]     [EDAD]                [ALUMNO]              ");
-                    System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
-                    System.out.println("---------------------------------------------------------");        
+                    System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));        
                 }
+                System.out.println("---------------------------------------------------------");
             } catch (SQLException Error101) {
                 System.out.println("Error de busqueda: "+ Error101.getMessage());
             }
