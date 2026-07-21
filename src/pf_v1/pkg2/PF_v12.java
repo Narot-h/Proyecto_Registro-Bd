@@ -244,7 +244,7 @@ public class PF_v12 {
                     System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
                     System.out.println("---------------------------------------------------------");        
                 }
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 System.out.println("Error de busqueda: " + e.getMessage());
             }
                 
@@ -368,8 +368,14 @@ public class PF_v12 {
                     System.out.println("[CODIGO]     [EDAD]                [ALUMNO]              ");
                     System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
                     System.out.println("---------------------------------------------------------");        
-                }
-            }catch (SQLException e) {
+                // DESDE AQUI
+				
+				
+				
+				
+				// HASTA AQUI
+				}
+            } catch (SQLException e) {
                 System.out.println("Error de busqueda: " + e.getMessage());
             }
                 
