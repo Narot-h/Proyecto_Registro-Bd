@@ -182,6 +182,7 @@ public class PF_v12 {
             System.out.println("3. Buscar por Apellido");
             System.out.println("4. Regresar al Menu");
             System.out.println("---------------------------------------");
+            System.out.print("Seleccione una opcion (1 - 4): ");
             do {
                 opcion= sc.nextInt();
                 try {
@@ -196,6 +197,7 @@ public class PF_v12 {
                 }
             } while (opcion < 1 || opcion > 4);
         } while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4);
+        sc.nextLine();
 
         switch (opcion) {
             case 1:
@@ -258,6 +260,7 @@ public class PF_v12 {
                 System.out.println("1. Buscar otro Alumno");
                 System.out.println("2. Regresar al Menu");
                 System.out.println("---------------------------------------");
+                System.out.print("Seleccione una opcion (1 - 2): ");
                 do {
                     opcion= sc.nextInt();
                     try {
@@ -276,10 +279,11 @@ public class PF_v12 {
     }
     
     private static void pornombre() {
-        int c, codBuscar, opcion;
+        int opcion;
+        String NombreC;
         boolean encontrado = false;
         do {
-            System.out.println("Ingrese los nombres del alumno");
+            System.out.print("Ingrese los nombres del alumno: ");
             do {
                 NombreC = sc.nextLine();
                 if (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false) {
@@ -288,14 +292,12 @@ public class PF_v12 {
                 }
             } while (NombreC.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false);
             sc.nextLine();
-
             // AQUI DEBE DE ESTAR LA BUSQUEDA DEL NOMBRE EN LA BASE DE DATOS (YA LO EDITE, COPIA Y PEGA TODO EN EL NEAT BEENS Y ERIFICA LEONARDO) LO DE ARRIBA YA ESTA BIEN
-            
-            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE Codigo=?";
+            String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE nombre=?";
             encontrado = false;
             
             try (Connection Conext = Coneccion_Bd.conectar(); PreparedStatement Consult = Conext.prepareStatement(sql)) {
-                Consult.setInt(2, codBuscar);
+                Consult.setInt(1, NombreC);
                 ResultSet Envio = Consult.executeQuery();
                 if (Envio.next()) {
                     encontrado = true;
@@ -318,6 +320,7 @@ public class PF_v12 {
                 System.out.println("1. Buscar otro Alumno");
                 System.out.println("2. Regresar al Menu");
                 System.out.println("---------------------------------------");
+                System.out.print("Seleccione una opcion (1 - 2): ");
                 do {
                     opcion= sc.nextInt();
                     try {
@@ -332,6 +335,7 @@ public class PF_v12 {
                     }
                 } while (opcion < 1 || opcion > 2);
             } while (opcion != 1 && opcion != 2);
+            sc.nextLine();
         } while (opcion != 2);
     }
     
