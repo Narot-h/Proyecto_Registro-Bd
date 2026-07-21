@@ -18,23 +18,24 @@ public class PF_v12 {
             System.out.println("2. LISTA DE ESTUDIANTES");
             System.out.println("3. BUSCAR POR CODIGO");
             System.out.println("4. EDITAR DATOS DE UN ALUMNO");
-            System.out.println("5. SALIR");
-            System.out.print("Selecciona una opcion: ");
+            System.out.println("5. ELIMINAR DATOS DE UN ALUMNO");
+            System.out.println("6. SALIR");
+            System.out.print("Seleccione una opcion (1 - 6): ");
             do {
                 try {
-                    opcion= sc.nextInt();
-                    if (opcion <1||opcion>5){
-                        System.out.println("Opcion invalidad; solo ingresar del 1 al 5 ");
-                        System.out.print("Selecciona nuevamente una opcion:");
+                    opcion = sc.nextInt();
+                    if (opcion < 1 && opcion > 5){
+                        System.out.println("Opcion invalida. Numero fuera del rango");
+                        System.out.print("Ingrese la opcion nuevamente (1 - 6):");
                     }
-                }catch (InputMismatchException e){
-                    System.out.println("Las letras no estan permitidas como opcion");
+                } catch (InputMismatchException e) {
+                    System.out.println("Opcion invalida. No se adminten letras");
                     sc.nextLine();
-                    System.out.print("Selecciona nuevamente un opcion: ");
+                    System.out.print("Ingrese la opcion nuevamente (1 - 6):");
                 }
-            }while (opcion <1||opcion >5);
+            } while (opcion < 1 && opcion > 5);
             
-            switch(opcion) {
+            switch (opcion) {
                 case 1:
                     registrar();
                     break;
@@ -44,7 +45,13 @@ public class PF_v12 {
                 case 3:
                     buscar();
                     break;
-                case 5:
+                case 4;
+                    editar();
+                    break;
+                case 5
+                    eliminar();
+                    break;
+                case 6:
                     System.out.println("Hasta luego");
                     break;
             }
@@ -57,15 +64,14 @@ public class PF_v12 {
         
         do {
             System.out.print("Ingrese codigo del Estudiante: ");
-            //Validador del codigo de estudiante
-            do{
+            do {
                 try {
                     codigo = sc.nextInt();
-                    if (codigo < 99 || codigo > 999){
+                    if (codigo < 99 && codigo > 999){
                         System.out.println("Codigo de estudiante fuera de rango");
                         System.out.print("Cree nuevamente el codigo: ");
                     }
-                } catch(InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Error: Solo se permiten ingresar numeros no otras variables");
                     sc.nextLine();
                     System.out.print("Ingrese nuevamente el codigo: ");
