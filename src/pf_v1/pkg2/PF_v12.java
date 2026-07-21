@@ -401,7 +401,7 @@ public class PF_v12 {
 
 				if (opcion == 1) {
 					switch (opcion){
-						caso 1:
+						case 1:
 							do {
 						        System.out.println("--------[¿QUE DESEA EDITAR?]--------");
 						        System.out.println("1. Codigo");
@@ -427,27 +427,27 @@ public class PF_v12 {
 						    } while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 5);
 		
 							switch (opcion) {
-								caso 1:
+								case 1:
 									System.out.println("Funciona opcion 1");
 									//editcodigo();
 									break;
-								caso 2:
+								case 2:
 									System.out.println("Funciona opcion 2");
 									//editnombres();
 									break;
-								caso 3:
+								case 3:
 									System.out.println("Funciona opcion 3");
 									//editapellidos();
 									break;
-								caso 4:
+								case 4:
 									System.out.println("Funciona opcion 4");
 									//editedad();
 									break;
-								caso 5:
+								case 5:
 									return;
 							}
 							break;
-						caso 2:
+						case 2:
 							return;
 					}
 				} else {
