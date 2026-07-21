@@ -428,16 +428,20 @@ public class PF_v12 {
 		
 							switch (opcion) {
 								caso 1:
-									editcodigo();
+									System.out.println("Funciona opcion 1");
+									//editcodigo();
 									break;
 								caso 2:
-									editnombres();
+									System.out.println("Funciona opcion 2");
+									//editnombres();
 									break;
 								caso 3:
-									editapellidos();
+									System.out.println("Funciona opcion 3");
+									//editapellidos();
 									break;
 								caso 4:
-									editedad();
+									System.out.println("Funciona opcion 4");
+									//editedad();
 									break;
 								caso 5:
 									return;
