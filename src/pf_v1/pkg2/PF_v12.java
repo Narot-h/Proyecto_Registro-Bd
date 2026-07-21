@@ -280,15 +280,14 @@ public class PF_v12 {
         String AlumBuscar;
         boolean encontrado = false;
         do {
-            System.out.println("Ingrese los nombres/apellidos del alumno");
+            System.out.println("Ingrese los nombres o los apellidos del alumno");
             do {
                 AlumBuscar = sc.nextLine();
                 if (AlumBuscar.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false) {
                     System.out.println("Caracter incorrecto");
-                    System.out.println("Ingrese el nombre/apellido nuevamente:");
+                    System.out.println("Ingrese los nombres o los apellidos nuevamente:");
                 }
             } while (AlumBuscar.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+") == false);
-            // AQUI DEBE DE ESTAR LA BUSQUEDA DEL NOMBRE EN LA BASE DE DATOS (YA LO EDITE, COPIA Y PEGA TODO EN EL NEAT BEENS Y ERIFICA LEONARDO) LO DE ARRIBA YA ESTA BIEN
             
             String sql = "SELECT Codigo, nombre, apellido, edad FROM Estudiantes  WHERE nombre LIKE ? OR apellido LIKE ?";
             encontrado = false;
@@ -302,15 +301,15 @@ public class PF_v12 {
                 System.out.println("[CODIGO]     [EDAD]                [ALUMNO]              ");
                 while (Envio.next()) {
                     encontrado = true;
-                    System.out.println(" " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
+                    System.out.println("  " + Envio.getInt("Codigo") + "          " + Envio.getInt("edad") + "          " + Envio.getString("nombre") + " " + Envio.getString("apellido"));
                 }
                 System.out.println("---------------------------------------------------------");        
-            } catch (SQLException Error101) {
-                System.out.println("Error de busqueda: "+ Error101.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Error de busqueda: "+ e.getMessage());
             }
                 
             if (encontrado == false) {
-                System.out.println("El alumno con el nombre/apellido: " + AlumBuscar + ", no se encuentra en el registro");
+                System.out.println("El alumno: " + AlumBuscar + ", no se encuentra registrado");
             }
                         
             do {
@@ -339,4 +338,7 @@ public class PF_v12 {
 
     private static void editar() {
     }
+
+	private static void eliminar() {
+	}
 }
